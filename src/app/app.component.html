@@ -1,0 +1,6 @@
+<h2 class="text-xl text-green-600 font-bold underline">Lista de Clientes</h2>
+<ul>
+  <li *ngFor="let cliente of clientes">
+    {{ cliente.nombre }} ({{ cliente.email }})
+  </li>
+</ul>
