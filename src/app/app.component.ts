@@ -1,22 +1,80 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  httpResource,
+  HttpStatusCode,
+} from '@angular/common/http';
+import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  EMPTY,
+  of,
+  switchMap,
+} from 'rxjs';
+import { ClientData } from './models/client';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
 })
-export class AppComponent implements OnInit {
-  clientes: any[] = [];
+export class AppComponent {
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  protected clientInput = new FormControl('');
 
-  ngOnInit() {
-    this.http.get<any[]>('http://localhost:8000/api/clientes/').subscribe({
-      next: (data) => (this.clientes = data),
-      error: (err) => console.error('Error al cargar clientes:', err),
-    });
-  }
+  // protected clients = toSignal(
+  //   this.http.get<ClientData[]>('http://localhost:8000/api/clientes/'),
+  //   {
+  //     initialValue: [],
+  //   }
+  // );
+
+  private clientsResource = httpResource<ClientData[]>(
+    () => 'http://localhost:8000/api/clientes/'
+  );
+  protected clients = computed(
+    () => this.clientsResource.value() ?? ([] as ClientData[])
+  );
+
+  protected clientSearchItem = computed(() => {
+    const client = this.clientSearch();
+    return client ? `${client.nombre} - ${client.email}` : '';
+  });
+
+  private clientSearch = toSignal(
+    this.clientInput.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((id) => {
+        if (!id || isNaN(Number(id))) {
+          return of(null);
+        }
+        return this.http
+          .post<ClientData>('http://localhost:8000/api/cliente/', {
+            id,
+          })
+          .pipe(
+            catchError((err: HttpErrorResponse) => {
+              if (err.status === HttpStatusCode.NotFound) {
+                console.log('Cliente no encontrado');
+              }
+              return EMPTY;
+            })
+          );
+      })
+    )
+  );
+
+  // private clientSearch = httpResource<any>(() => ({
+  //   url: 'http://localhost:8000/api/cliente/',
+  //   method: 'POST',
+  //   body: { id: this.clientId() ?? false },
+  // }));
 }
