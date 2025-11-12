@@ -2,7 +2,9 @@
   "name": "@frontend/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "nx serve r-app"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~20.3.0",
@@ -39,6 +41,7 @@
     "@types/node": "18.16.9",
     "@typescript-eslint/utils": "^8.40.0",
     "angular-eslint": "^20.3.0",
+    "autoprefixer": "^10.4.0",
     "cypress": "^14.2.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
@@ -48,7 +51,9 @@
     "jest-preset-angular": "~14.6.1",
     "jest-util": "^29.7.0",
     "nx": "22.0.3",
+    "postcss": "^8.4.5",
     "prettier": "^2.6.2",
+    "tailwindcss": "^4.1.17",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
