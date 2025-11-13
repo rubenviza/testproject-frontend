@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { isNumber } from '@frontend/utilities';
 import {
   catchError,
   debounceTime,
@@ -42,7 +43,7 @@ export class LandingClientsComponent {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((id) => {
-        if (!id || isNaN(Number(id))) {
+        if (!id || !isNumber(id)) {
           return of(undefined);
         }
         return this.http

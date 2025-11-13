@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@frontend/clients": ["libs/modules/clients/src/index.ts"]
+      "@frontend/clients": ["libs/modules/clients/src/index.ts"],
+      "@frontend/utilities": ["libs/utilities/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
