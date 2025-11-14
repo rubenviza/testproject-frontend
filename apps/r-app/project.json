@@ -20,7 +20,10 @@
             "input": "apps/r-app/public"
           }
         ],
-        "styles": ["apps/r-app/src/styles.css"]
+        "styles": [
+          "apps/r-app/src/custom-theme.scss",
+          "apps/r-app/src/styles.css"
+        ]
       },
       "configurations": {
         "production": {
