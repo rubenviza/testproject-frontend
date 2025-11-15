@@ -15,9 +15,9 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { catchError, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
-import { occupations } from '../constants/occupations';
-import { Client } from '../models/client';
-import { Occupation } from '../models/occupation';
+import { occupations } from '../../constants/occupations';
+import { Client } from '../../models/client';
+import { Occupation } from '../../models/occupation';
 
 @Component({
   selector: 'lib-clients-resource-api',

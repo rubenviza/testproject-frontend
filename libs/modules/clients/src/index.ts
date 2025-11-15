@@ -1,1 +1,1 @@
-export * from './lib/landing-clients-container/landing-clients-container';
+export * from './lib/components/landing-clients-container/landing-clients-container';

@@ -11,7 +11,7 @@ import {
   of,
   switchMap,
 } from 'rxjs';
-import { Client } from '../models/client';
+import { Client } from '../../models/client';
 
 @Component({
   selector: 'lib-clients',
