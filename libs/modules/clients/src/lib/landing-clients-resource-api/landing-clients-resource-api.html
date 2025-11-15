@@ -10,18 +10,22 @@
     </ul>
     <input type="number" [formControl]="clientIdControl" class="border-2" />
     <div class="font-mono">Datos: {{ clientSearchItem() }}</div>
-    <div class="w-64">
-      <mat-label class="font-semibold">Ocupación</mat-label>
-      <mat-select
-        class="border-2"
-        [formControl]="occupationSelectControl"
-        [compareWith]="compareOccupation"
-      >
-        @for(occupation of occupations; track occupation.id) {
-        <mat-option [value]="occupation">{{occupation.name}} </mat-option>
-        }
-      </mat-select>
+    <div class="flex">
+      <div class="w-64">
+        <mat-label class="font-semibold">Ocupación</mat-label>
+        <mat-select
+          class="border-2"
+          [formControl]="occupationSelectControl"
+          [compareWith]="compareOccupation"
+        >
+          @for(occupation of occupations; track occupation.id) {
+          <mat-option [value]="occupation">{{occupation.name}} </mat-option>
+          }
+        </mat-select>
+      </div>
+      <i
+        class="content-end text-4xl ml-6 text-red-400 ti {{ occupationIcon() }}"
+      ></i>
     </div>
-    <i class="text-2xl text-red-400 ti {{ occupationIcon() }}"></i>
   </div>
 </div>

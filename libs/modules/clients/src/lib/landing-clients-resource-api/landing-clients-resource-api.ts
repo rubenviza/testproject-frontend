@@ -7,10 +7,14 @@ import {
   inject,
   linkedSignal,
 } from '@angular/core';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
+import {
+  rxResource,
+  takeUntilDestroyed,
+  toSignal,
+} from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { catchError, debounceTime, distinctUntilChanged, of } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
 import { occupations } from '../constants/occupations';
 import { Client } from '../models/client';
 import { Occupation } from '../models/occupation';
@@ -24,8 +28,22 @@ export class LandingClientsResourceApiComponent {
   constructor() {
     effect(() => {
       const occupation = this.clientSearch()?.occupation ?? null;
-      this.occupationSelectControl.setValue(occupation);
+      this.occupationSelectControl.setValue(occupation, {
+        emitEvent: false,
+      });
     });
+
+    this.occupationSelectControl.valueChanges
+      .pipe(
+        takeUntilDestroyed(),
+        tap((occupation) => {
+          const icon = occupation?.icon;
+          if (icon) {
+            this.occupationIcon.set(icon);
+          }
+        })
+      )
+      .subscribe();
   }
 
   private http = inject(HttpClient);
@@ -79,8 +97,6 @@ export class LandingClientsResourceApiComponent {
   protected occupationIcon = linkedSignal({
     source: this.clientSearch,
     computation: (client) => {
-      const occupation = client?.occupation ?? null;
-      this.occupationSelectControl.setValue(occupation);
       const id = client?.occupation.id;
       if (!id) {
         return '';
