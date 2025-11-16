@@ -77,5 +77,6 @@
     "@nx/angular:component": {
       "style": "css"
     }
-  }
+  },
+  "neverConnectToCloud": true
 }
