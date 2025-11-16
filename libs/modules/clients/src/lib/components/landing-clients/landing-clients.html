@@ -8,9 +8,7 @@
       <li>{{ client.nombre }} ({{ client.email }})</li>
       }
     </ul>
-    <div class="grid">
-      <input type="number" [formControl]="clientInput" class="border-2" />
-      <span class="min-h-10 font-mono">{{ clientSearchItem() }}</span>
-    </div>
+    <input type="number" [formControl]="clientInput" class="border-2" />
+    <div class="min-h-10 font-mono">{{ clientSearchItem() }}</div>
   </div>
 </div>
