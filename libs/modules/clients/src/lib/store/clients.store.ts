@@ -13,12 +13,15 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, map, switchMap, tap } from 'rxjs';
 import { ClientsService } from '../services/clients.service';
 
+import { withDevtools } from '@angular-architects/ngrx-toolkit';
+
 type ClientsList = { clients: Client[]; loading: boolean };
 
 const initialState: ClientsList = { clients: [], loading: false };
 
 export const ClientsStore = signalStore(
   withState(initialState),
+  withDevtools('clients-store'),
   withMethods((store, clientsService = inject(ClientsService)) => ({
     loadAll: rxMethod<void>(
       pipe(

@@ -4,9 +4,11 @@
       Lista de Clientes
     </h2>
     <ul>
-      @for (client of clients(); track $index){
+      @if (loading()) {
+      <mat-spinner [diameter]="50" />
+      } @else { @for (client of clients(); track $index) {
       <li>{{ client.nombre }} ({{ client.email }})</li>
-      }
+      } }
     </ul>
   </div>
 </div>
