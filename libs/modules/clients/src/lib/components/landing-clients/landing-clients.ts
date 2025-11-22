@@ -12,23 +12,24 @@ import {
   switchMap,
 } from 'rxjs';
 import { Client } from '../../models/client';
+import { ClientsService } from '../../services/clients.service';
 
 @Component({
   selector: 'lib-clients',
   templateUrl: './landing-clients.html',
   imports: [CommonModule, ReactiveFormsModule],
+  providers: [ClientsService],
 })
 export class LandingClientsComponent {
   private http = inject(HttpClient);
 
+  private clientsService = inject(ClientsService);
+
   protected clientInput = new FormControl('');
 
-  protected clients = toSignal(
-    this.http.get<Client[]>('http://localhost:8000/api/clientes/'),
-    {
-      initialValue: [],
-    }
-  );
+  protected clients = toSignal(this.clientsService.getClients(), {
+    initialValue: [] as Client[],
+  });
 
   protected clientSearchItem = computed(() => {
     const client = this.clientSearch();

@@ -1,0 +1,12 @@
+<div class="flex justify-center">
+  <div>
+    <h2 class="text-xl text-purple-600 font-bold underline">
+      Lista de Clientes
+    </h2>
+    <ul>
+      @for (client of clients(); track $index){
+      <li>{{ client.nombre }} ({{ client.email }})</li>
+      }
+    </ul>
+  </div>
+</div>
