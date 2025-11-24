@@ -1,13 +1,11 @@
 <div class="flex justify-center">
   <div>
-    <h2 class="text-xl text-green-600 font-bold underline">
-      Lista de Clientes
-    </h2>
-    <ul>
-      @for (client of clients(); track $index){
-      <li>{{ client.nombre }} ({{ client.email }})</li>
-      }
-    </ul>
+    <lib-header-clients
+      title="Lista de Clientes"
+      [listColor]="listColor.green"
+      [clients]="clients()"
+      [loading]="loading()"
+    />
     <input type="number" [formControl]="clientInput" class="border-2" />
     <div class="min-h-10 font-mono">{{ clientSearchItem() }}</div>
   </div>

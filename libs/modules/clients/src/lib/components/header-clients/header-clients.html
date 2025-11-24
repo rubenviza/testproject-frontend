@@ -1,0 +1,8 @@
+<h2 class="text-xl {{ listColor() }} font-bold underline">{{ title() }}</h2>
+<ul class="pl-4 list-disc">
+  @if (loading()) {
+  <mat-spinner [diameter]="50" />
+  } @else { @for (client of clients(); track client.id) {
+  <li>{{ client.nombre }} ({{ client.email }})</li>
+  } }
+</ul>

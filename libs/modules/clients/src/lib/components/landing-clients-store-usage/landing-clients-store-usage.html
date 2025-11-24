@@ -1,14 +1,7 @@
-<div class="flex justify-center">
-  <div>
-    <h2 class="text-xl text-purple-600 font-bold underline">
-      Lista de Clientes (con signalStore)
-    </h2>
-    <ul>
-      @if (loading()) {
-      <mat-spinner [diameter]="50" />
-      } @else { @for (client of clients(); track $index) {
-      <li>{{ client.nombre }} ({{ client.email }})</li>
-      } }
-    </ul>
-  </div>
+<div class="flex justify-center mt-8">
+  <lib-header-clients
+    title="Lista de Clientes (con signalStore)"
+    [clients]="clients()"
+    [loading]="loading()"
+  />
 </div>
