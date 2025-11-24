@@ -15,14 +15,21 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { catchError, debounceTime, distinctUntilChanged, of, tap } from 'rxjs';
+import { listColor } from '../../constants/list-color';
 import { occupations } from '../../constants/occupations';
 import { Client } from '../../models/client';
 import { Occupation } from '../../models/occupation';
+import { HeaderClientsComponent } from '../header-clients/header-clients';
 
 @Component({
   selector: 'lib-clients-resource-api',
   templateUrl: './landing-clients-resource-api.html',
-  imports: [CommonModule, ReactiveFormsModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    HeaderClientsComponent,
+  ],
 })
 export class LandingClientsResourceApiComponent {
   constructor() {
@@ -50,6 +57,8 @@ export class LandingClientsResourceApiComponent {
 
   protected occupations = occupations;
 
+  protected listColor = listColor;
+
   protected clientIdControl = new FormControl('');
 
   protected occupationSelectControl = new FormControl<Occupation | null>(null);
@@ -61,6 +70,11 @@ export class LandingClientsResourceApiComponent {
   protected clients = computed(
     () => this.clientsResource.value() ?? ([] as Client[])
   );
+
+  protected loading = linkedSignal({
+    source: this.clients,
+    computation: (clients) => (clients.length === 0 ? true : false),
+  });
 
   protected clientSearchItem = computed(() => {
     const client = this.clientSearch();
