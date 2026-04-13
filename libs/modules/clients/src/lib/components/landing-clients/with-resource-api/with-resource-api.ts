@@ -22,7 +22,7 @@ import { Occupation } from '../../../models/occupation';
 import { HeaderClientsComponent } from '../../header-clients/header-clients';
 
 @Component({
-  selector: 'lib-clients-resource-api',
+  selector: 'lib-with-resource-api',
   templateUrl: './with-resource-api.html',
   imports: [
     CommonModule,

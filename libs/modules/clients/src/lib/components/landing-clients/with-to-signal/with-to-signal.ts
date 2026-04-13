@@ -18,7 +18,7 @@ import { ClientsService } from '../../../services/clients.service';
 import { HeaderClientsComponent } from '../../header-clients/header-clients';
 
 @Component({
-  selector: 'lib-clients',
+  selector: 'lib-with-to-signal',
   templateUrl: './with-to-signal.html',
   imports: [CommonModule, ReactiveFormsModule, HeaderClientsComponent],
   providers: [ClientsService],

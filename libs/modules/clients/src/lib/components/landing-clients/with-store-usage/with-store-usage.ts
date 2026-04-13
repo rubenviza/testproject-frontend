@@ -5,7 +5,7 @@ import { ClientsStore } from '../../../store/clients.store';
 import { HeaderClientsComponent } from '../../header-clients/header-clients';
 
 @Component({
-  selector: 'lib-landing-clients-store-usage',
+  selector: 'lib-with-store-usage',
   imports: [CommonModule, HeaderClientsComponent],
   templateUrl: './with-store-usage.html',
   providers: [ClientsStore, ClientsService],

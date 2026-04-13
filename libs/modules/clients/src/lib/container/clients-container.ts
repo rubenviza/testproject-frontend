@@ -4,12 +4,12 @@ import { LandingClientsStoreUsageComponent } from '../components/landing-clients
 import { LandingClientsComponent } from '../components/landing-clients/with-to-signal/with-to-signal';
 
 @Component({
-  selector: 'lib-landing-clients-container',
+  selector: 'lib-clients-container',
   imports: [
     LandingClientsComponent,
     LandingClientsResourceApiComponent,
     LandingClientsStoreUsageComponent,
   ],
-  templateUrl: './landing-clients-container.html',
+  templateUrl: './clients-container.html',
 })
 export class LandingClientsContainer {}

@@ -1,1 +1,1 @@
-export * from './lib/container/landing-clients-container';
+export * from './lib/container/clients-container';
