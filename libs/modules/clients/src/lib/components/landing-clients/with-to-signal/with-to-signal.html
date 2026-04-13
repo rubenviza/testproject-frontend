@@ -1,12 +1,12 @@
 <div class="flex justify-center">
   <div>
     <lib-header-clients
-      title="Lista de Clientes"
+      title="Con toSignal"
       [listColor]="listColor.green"
       [clients]="clients()"
       [loading]="loading()"
     />
     <input type="number" [formControl]="clientInput" class="border-2" />
-    <div class="min-h-10 font-mono">{{ clientSearchItem() }}</div>
+    <div class="min-h-5 font-mono">{{ clientSearchItem() }}</div>
   </div>
 </div>

@@ -12,14 +12,14 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { listColor } from '../../constants/list-color';
-import { Client } from '../../models/client';
-import { ClientsService } from '../../services/clients.service';
-import { HeaderClientsComponent } from '../header-clients/header-clients';
+import { listColor } from '../../../constants/list-color';
+import { Client } from '../../../models/client';
+import { ClientsService } from '../../../services/clients.service';
+import { HeaderClientsComponent } from '../../header-clients/header-clients';
 
 @Component({
   selector: 'lib-clients',
-  templateUrl: './landing-clients.html',
+  templateUrl: './with-to-signal.html',
   imports: [CommonModule, ReactiveFormsModule, HeaderClientsComponent],
   providers: [ClientsService],
 })
