@@ -73,7 +73,7 @@ export class LandingClientsResourceApiComponent {
 
   protected loading = linkedSignal({
     source: this.clients,
-    computation: (clients) => (clients.length === 0 ? true : false),
+    computation: (clients) => clients.length === 0,
   });
 
   protected clientSearchItem = computed(() => {

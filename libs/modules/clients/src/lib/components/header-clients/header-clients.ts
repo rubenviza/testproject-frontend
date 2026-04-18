@@ -14,7 +14,7 @@ export class HeaderClientsComponent {
 
   public readonly listColor = input(listColor.purple);
 
-  public readonly clients = input.required<Client[]>();
+  public readonly clients = input([] as Client[]);
 
   public readonly loading = input(true);
 }
