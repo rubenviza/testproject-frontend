@@ -1,0 +1,51 @@
+<div class="flex justify-center">
+  <div>
+    <lib-header-clients
+      title="Signal form"
+      [listColor]="listColor.orange"
+      [loading]="false"
+    />
+
+    <form [formRoot]="personForm" class="client-input-form flex flex-col gap-1">
+      <mat-form-field hideRequiredMarker="true" class="w-full compact">
+        <mat-label>Nombre</mat-label>
+        <input matInput [formField]="personForm.nombre" />
+      </mat-form-field>
+      @for(err of personForm.nombre().errors(); track $index) { @if(err.kind ===
+      'required') {
+      <div class="text-red-600 -mt-6">Name is required</div>
+      } }
+
+      <mat-form-field hideRequiredMarker="true" class="w-full compact">
+        <mat-label>Edad</mat-label>
+        <input matInput [formField]="personForm.edad" type="number" />
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker="true" class="w-full compact">
+        <mat-label>Telephone number</mat-label>
+        <input matInput [formField]="personForm.telephoneNumber" />
+      </mat-form-field>
+
+      <div class="flex gap-4 justify-end">
+        <button
+          type="submit"
+          matButton="filled"
+          [disabled]="personForm().invalid()"
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          matButton="outlined"
+          (click)="changePersonName('Billie Black')"
+        >
+          Change name
+        </button>
+      </div>
+    </form>
+
+    <div class="mt-4">
+      <pre>{{ personForm().value() | json }}</pre>
+    </div>
+  </div>
+</div>
