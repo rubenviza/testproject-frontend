@@ -11,22 +11,31 @@
         <mat-label>Nombre</mat-label>
         <input matInput [formField]="personForm.nombre" />
       </mat-form-field>
-      @for(err of personForm.nombre().errors(); track $index) { @if(err.kind ===
-      'required') {
-      <div class="text-red-600 -mt-6">Name is required</div>
+      @if (personForm.nombre().touched() && personForm.nombre().invalid()) {
+      @for(error of personForm.nombre().errors(); track error.kind) {
+      <div class="text-red-600 -mt-6">{{error.message}}</div>
       } }
 
       <mat-form-field hideRequiredMarker="true" class="w-full compact">
         <mat-label>Edad</mat-label>
         <input matInput [formField]="personForm.edad" type="number" />
       </mat-form-field>
+      @if (personForm.edad().touched() && personForm.edad().invalid()) {
+      @for(error of personForm.edad().errors(); track error.kind) {
+      <div class="text-red-600 -mt-6">{{error.message}}</div>
+      } }
 
       <mat-form-field hideRequiredMarker="true" class="w-full compact">
         <mat-label>Telephone number</mat-label>
         <input matInput [formField]="personForm.telephoneNumber" />
       </mat-form-field>
+      @if (personForm.telephoneNumber().touched() &&
+      personForm.telephoneNumber().invalid()) { @for(error of
+      personForm.telephoneNumber().errors(); track error.kind) {
+      <div class="text-red-600 -mt-6">{{error.message}}</div>
+      } }
 
-      <div class="flex gap-4 justify-end">
+      <div class="flex gap-4 justify-end mt-4">
         <button
           type="submit"
           matButton="filled"

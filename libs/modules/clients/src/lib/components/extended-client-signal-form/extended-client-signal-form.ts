@@ -1,14 +1,12 @@
 import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import {
-  form,
-  FormField,
-  FormRoot,
-  minLength,
-  required,
-} from '@angular/forms/signals';
+import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import {
+  clientFormInitialData,
+  clientFormSchema,
+} from '../../constants/client-form';
 import { listColor } from '../../constants/list-color';
 import { ClientExtended } from '../../models/client-extended';
 import { HeaderClientsComponent } from '../header-clients/header-clients';
@@ -29,29 +27,16 @@ import { HeaderClientsComponent } from '../header-clients/header-clients';
 export class ExtendedClientSignalForm {
   protected listColor = listColor;
 
-  protected readonly person = signal<ClientExtended>({
-    id: 0,
-    nombre: '',
-    edad: null,
-    telephoneNumber: '',
-  });
+  protected readonly person = signal<ClientExtended>(clientFormInitialData);
 
-  protected readonly personForm = form(
-    this.person,
-    (path) => {
-      required(path.nombre);
-      required(path.telephoneNumber);
-      minLength(path.telephoneNumber, 7);
+  protected readonly personForm = form(this.person, clientFormSchema, {
+    submission: {
+      action: async () =>
+        console.log('Form submitted with value:', this.person()),
+      //onInvalid: () => console.log('Form is invalid'),
+      ignoreValidators: 'none',
     },
-    {
-      submission: {
-        action: async () =>
-          console.log('Form submitted with value:', this.person()),
-        //onInvalid: () => console.log('Form is invalid'),
-        ignoreValidators: 'none',
-      },
-    }
-  );
+  });
 
   public changePersonName(value: string) {
     this.personForm.nombre().value.set(value);
