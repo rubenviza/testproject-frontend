@@ -7,7 +7,7 @@
     />
 
     <form [formRoot]="personForm" class="client-input-form flex flex-col gap-1">
-      <mat-form-field hideRequiredMarker="true" class="w-full compact">
+      <mat-form-field class="w-full compact">
         <mat-label>Nombre</mat-label>
         <input matInput [formField]="personForm.nombre" />
       </mat-form-field>
@@ -25,7 +25,10 @@
       <div class="text-red-600 -mt-6">{{error.message}}</div>
       } }
 
-      <mat-form-field hideRequiredMarker="true" class="w-full compact">
+      <mat-form-field
+        hideRequiredMarker="{{ personForm.hasTelephoneNumber().required() }}"
+        class="w-full compact"
+      >
         <mat-label>Telephone number</mat-label>
         <input matInput [formField]="personForm.telephoneNumber" />
       </mat-form-field>
@@ -35,7 +38,25 @@
       <div class="text-red-600 -mt-6">{{error.message}}</div>
       } }
 
-      <div class="flex gap-4 justify-end mt-4">
+      <mat-form-field
+        hideRequiredMarker="{{ personForm.hasAlias().required() }}"
+        class="w-full compact"
+      >
+        <mat-label>Alias</mat-label>
+        <input matInput [formField]="personForm.alias" />
+      </mat-form-field>
+
+      <mat-checkbox [formField]="personForm.hasTelephoneNumber">
+        Telephone number
+      </mat-checkbox>
+      <mat-checkbox [formField]="personForm.hasAlias"> Alias </mat-checkbox>
+      <div class="h-6">
+        @if (personForm.hasAlias().invalid()) { @for(error of
+        personForm.hasAlias().errors(); track error.kind) {
+        <div class="text-red-600 -mt-2">{{error.message}}</div>
+        } }
+      </div>
+      <div class="flex gap-6 justify-end items-end h-10">
         <button
           type="submit"
           matButton="filled"

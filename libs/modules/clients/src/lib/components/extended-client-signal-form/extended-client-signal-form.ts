@@ -2,6 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { form, FormField, FormRoot } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import {
   clientFormInitialData,
@@ -20,6 +21,7 @@ import { HeaderClientsComponent } from '../header-clients/header-clients';
     JsonPipe,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
   ],
   styleUrl: './extended-client-signal-form.scss',
   templateUrl: './extended-client-signal-form.html',

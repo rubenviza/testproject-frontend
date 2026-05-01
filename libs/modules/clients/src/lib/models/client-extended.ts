@@ -1,7 +1,9 @@
 import { Client } from './client';
 
 export type ClientExtended = Pick<Client, 'id' | 'nombre'> & {
-  edad: number | null;
+  edad: number;
   telephoneNumber: string;
-  alias?: string;
+  alias: string;
+  hasAlias: boolean;
+  hasTelephoneNumber: boolean;
 };
